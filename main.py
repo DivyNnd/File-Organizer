@@ -22,3 +22,7 @@ for subdir in root.iterdir():
 
 for category,num in count.items():
     print(f"Number of files copied in {category.name} is {num}.")
+
+
+#TODO: Add logic to make the program dynamic in choosing the directory i.e. argpath
+#TODO: Handle naming conflicts
