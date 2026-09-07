@@ -24,3 +24,6 @@ for subdir in root.iterdir():
 
 for category,num in count.items():
     print(f"Number of files copied in {category.name} is {num}.")
+
+#TODO: Handle naming conflicts
+#TODO: Create a ccopy of this file with argpath to get directory directly from CLI which removes user dependency and can be integrated with other programs
