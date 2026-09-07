@@ -15,7 +15,7 @@ for subdir in root.iterdir():
         dest=root / extension_map.get(ext,"Other")
         try:
             dest.mkdir(parents=True,exist_ok=True)
-            shutil.copy(str(subdir),str(dest/subdir.name))
+            shutil.move(str(subdir),str(dest/subdir.name))
             count[dest]=count.get(dest,0)+1
         except Exception as e:
             print(f"Error moving {subdir.name}: {e}")
