@@ -1,8 +1,12 @@
 from pathlib import Path
 import shutil
+import argparse
 
-directory=input("Enter the path:").strip()
-root = Path(directory)
+parser=argparse.ArgumentParser(description="Organize files based on extension")
+parser.add_argument("folder")
+parser.add_argument("--dry-run", action="store_true")
+args=parser.parse_args()
+root = Path(args.folder)
 print(root)
 extension_map = {
     ".jpg": "Images",
@@ -16,9 +20,12 @@ for subdir in root.iterdir():
         ext=subdir.suffix.lower()
         dest=root / extension_map.get(ext,"Other")
         try:
-            dest.mkdir(parents=True,exist_ok=True)
-            shutil.move(str(subdir),str(dest/subdir.name))
-            count[dest]=count.get(dest,0)+1
+            if args.dry_run:
+                print(f"{subdir.name} will be moved to {dest.name}")
+            else:
+                dest.mkdir(parents=True,exist_ok=True)
+                shutil.move(str(subdir),str(dest/subdir.name))
+                count[dest]=count.get(dest,0)+1
         except Exception as e:
             print(f"Error moving {subdir.name}: {e}")
 
